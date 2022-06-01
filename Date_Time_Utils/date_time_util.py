@@ -1,6 +1,8 @@
 from datetime import datetime
-import sys
-print(sys.path[0])
+from calendar import monthrange
+
+#import sys
+#print(sys.path[0])
 
 #------------------------------------
 class helpers_date_handling():
@@ -56,6 +58,8 @@ add days:
 		self.datum_dic['month_int'] = int(self.datum_dic['month_str'])
 		self.datum_dic['day_str'] = (now.strftime('%d'))
 		self.datum_dic['day_int'] = int(self.datum_dic['day_str'])
+		self.datum_dic['days_in_month_int'] = monthrange(self.datum_dic['year_int'], self.datum_dic['month_int'])[1]
+		self.datum_dic['days_in_month_str'] = str(self.datum_dic['days_in_month_int'])
 		self.datum_dic['date_str'] = self.datum_dic['year_str'] + '_' + self.datum_dic['month_str'] + '_' + self.datum_dic['day_str']
 		self.datum_dic['date_date'] = datetime.strptime(self.datum_dic['date_str'], date_format).date()
 		self.datum_dic['date_time_str'] = now.strftime(date_time_format)
@@ -78,8 +82,6 @@ add days:
 			diff_dic['Status_Flag'] = t2.datum_dic['Status_Flag']
 			return diff_dic
 		
-		
-		
 		if t1.datum_dic['date_time'] < t2.datum_dic['date_time']:
 			#print('t1 kleiner')
 			diff_dic['time_delta'] = t2.datum_dic['date_time'] - t1.datum_dic['date_time']
@@ -87,7 +89,6 @@ add days:
 			diff_dic['time_delta'] = t1.datum_dic['date_time'] - t2.datum_dic['date_time']
 			#print('t1 größer')
 			
-		
 		if t1.datum_dic['date_date'] == t2.datum_dic['date_date']:
 			same_date_flag = True
 		#print(t1.datum_dic['date_date'].year, t2.datum_dic['date_date'].year)
@@ -125,5 +126,20 @@ hp1 = helpers_date_handling(test_date, debug_flag = True)
 hp2 = helpers_date_handling(debug_flag = True)
 diff = hp1.date_time_differenz(hp2 , hp1)
 print(diff)
+
+
+dbf = False
+test_date1 = '2021 12,23 00:00:04'
+test_date2 = '2021_02_23 00:00:03'
+test1 = '2021_12_23'
+
+print(f'{"-"*40}')
+
+hp1 = helpers_date_handling(test1, debug_flag = dbf)
+hp2 = helpers_date_handling(test_date2, debug_flag = dbf)
+diff = hp1.date_time_differenz(hp1 , hp2)
+print(diff)
+
 '''
+
 #___________________________________________
