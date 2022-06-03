@@ -1,8 +1,57 @@
+import numpy as np
 from datetime import datetime
 from calendar import monthrange
 
+
 #import sys
 #print(sys.path[0])
+
+
+class helpers_date_utils():
+	def __init__(self):
+		self.monat_name_list = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+		self.month_name_list = []
+		self.get_month_names()
+		pass
+
+#------------------------
+	def get_month_list(self):
+		def wrapper(arg):
+			a1 = '_' + "{:02d}".format(arg) + '_'
+			return(a1)
+		
+		month_list = np.arange(12)
+		m_list = []
+		for i in month_list:
+			m_list.append(wrapper(i+1))
+		#print(m_list)
+		#m_list = ['_01_', '_02_', '_03_', '_04_','_05_', '_06_', '_07_', '_08_', '_09_', '_10_', '_11_', '_12_'] 	
+		#print(m_list)
+		return m_list
+	#------------------------
+	def get_month_names(self):
+		list_month = np.arange(12)
+		for i in list_month:
+			month_num = str(i+1)
+			#provide month number
+			datetime_object = datetime.strptime(month_num, "%m")
+			self.month_name_list.append(datetime_object.strftime("%B"))
+					
+	#------------------------
+	def compare_date_now_and_recorted(self, dt_recorted, flag_debug = False):
+		flag_same_date = False
+		dt_rc = helpers_date_handling(dt_recorted)
+		dt_now = helpers_date_handling()	
+		time_dic = dt_rc.date_time_differenz(dt_rc, dt_now)
+		if time_dic['same_year_month_day_flag']:
+			flag_same_date = True 
+		# Debug
+		if flag_debug:
+			print(dt_rc.datum_dic['date_date'])
+			print(dt_now.datum_dic['date_date'])
+			print(time_dic['same_date_flag']) #== False:
+		#---
+		return flag_same_date
 
 #------------------------------------
 class helpers_date_handling():

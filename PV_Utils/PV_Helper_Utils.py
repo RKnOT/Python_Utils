@@ -131,8 +131,8 @@ dict_keys(['last_recorded_date', 'years_month_yield_data', 'years_yield_data_auf
 			year_month_names[key_year] = list_month
 		year_file_names['Years'] = list_temp		
 				
-		print((year_file_names['Years']))
-		print(year_month_names)		
+		#print((year_file_names['Years']))
+		#print(year_month_names)		
 		
 		for item in year_file_names['Years']:
 			dest = self.dest + item
@@ -167,7 +167,7 @@ dict_keys(['last_recorded_date', 'years_month_yield_data', 'years_yield_data_auf
 			# debug
 			#if key_year == '2014': break
 			#------------
-			print(key_year)
+			#print(key_year)
 			month = list(self.dic_y_m_d[key_year].keys())
 			for key_month in month:
 				

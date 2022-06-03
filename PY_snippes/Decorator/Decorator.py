@@ -1,4 +1,40 @@
 from datetime import datetime
+import numpy as np
+
+
+print(f'{"_"*30}')
+
+
+def wrapper(arg):
+	a1 = '_' + "{:02d}".format(arg) + '_'
+	return(a1)
+	
+month_list = np.arange(12)
+month_list_str = []
+for i in month_list:
+	month_list_str.append(wrapper(i+1))
+print(month_list_str)
+
+	
+	
+print(f'{"_"*30}')
+
+def decorator_with_arguments(func):
+	def wrapper(arg1):
+		a1 = '__' + "{:02d}".format(arg1) + '__'
+		print("My arguments are: {0}".format(a1))
+		func(a1)
+	return wrapper
+
+
+@decorator_with_arguments
+def get_nrs(w1):
+	print(w1)
+
+print(get_nrs(1))
+
+
+print(f'{"_"*30}')
 
 def log_datetime(func):
 			'''Log the date and time of a function'''
